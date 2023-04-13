@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I used it to keep track of time dedicated to solve exercises for the Open Fullstack Javascript course at Helskinki University. https://fullstackopen.com/en/
 
 ## Available Scripts
 
