@@ -54,7 +54,7 @@ const App = () => {
           radius="lg"
           size="lg"
           onClick={handleClick}
-          disabled={!form.isValid()}
+          //disabled={!form.isValid()}
         >
           {interval.active ? 'Stop' : 'Start'} counting
         </Button>
@@ -68,7 +68,7 @@ const App = () => {
             radius="lg"
             size="l"
             variant="filled"
-            styles={{ input: { textAlign: 'center' }, root: { textAlign: 'center' } }}
+            styles={{ input: { textAlign: 'center', color:'gray'  }, root: { textAlign: 'center'}, label: { color:'gray' } }}
             disabled={interval.active}
             onChange={e => setSeconds(toTimeString(e.target.value))}
             {...form.getInputProps('duration')}
@@ -80,6 +80,7 @@ const App = () => {
             color='gray'
             onClick={() => setSeconds(toSecondsFromDuration(inputRef.current.value))}
             disabled={!form.isValid() || interval.active}
+            compact
           >
             Set
           </Button>
