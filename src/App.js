@@ -11,7 +11,7 @@ const App = () => {
 
   const toTimeString = (s) => new Date(s * 1000).toISOString().substring(11, 19)
 
-  const handleIntervalTick = () => setSeconds((s) => s + 1 )
+  const handleIntervalTick = () => setSeconds((s) => s + 1)
   const interval = useInterval(handleIntervalTick, 1000)
 
   /** Calculates total seconds from a timestamp shaped "HH:mm:ss"
@@ -43,21 +43,21 @@ const App = () => {
 
 
   return (
-    <form>
-      <Stack align="center">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Text fz='lg' c='dimmed'>Elapsed time</Text>
-        <Title order={1} c='darkgray'>{toTimeString(seconds)}</Title>
-        <Button
-          variant="outline"
-          color={interval.active ? 'red' : 'teal'}
-          radius="lg"
-          size="lg"
-          onClick={handleClick}
-          //disabled={!form.isValid()}
-        >
-          {interval.active ? 'Stop' : 'Start'} counting
-        </Button>
+    <Stack align="center">
+      <img src={logo} className="App-logo" alt="logo" />
+      <Text fz='lg' c='dimmed'>Elapsed time</Text>
+      <Title order={1} c='darkgray'>{toTimeString(seconds)}</Title>
+      <Button
+        variant="outline"
+        color={interval.active ? 'red' : 'teal'}
+        radius="lg"
+        size="lg"
+        onClick={handleClick}
+      //disabled={!form.isValid()}
+      >
+        {interval.active ? 'Stop' : 'Start'} counting
+      </Button>
+      <form>
         <Flex gap='md'>
           <TextInput
             ref={inputRef}
@@ -68,7 +68,7 @@ const App = () => {
             radius="lg"
             size="l"
             variant="filled"
-            styles={{ input: { textAlign: 'center', color:'gray'  }, root: { textAlign: 'center'}, label: { color:'gray' } }}
+            styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center' }, label: { color: 'gray' } }}
             disabled={interval.active}
             onChange={e => setSeconds(toTimeString(e.target.value))}
             {...form.getInputProps('duration')}
@@ -85,8 +85,8 @@ const App = () => {
             Set
           </Button>
         </Flex>
-      </Stack>
-    </form>
+      </form>
+    </Stack>
   );
 }
 
