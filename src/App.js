@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useInterval } from '@mantine/hooks';
 import { Stack, Button, TextInput, Title, Text, Flex } from '@mantine/core';
 import { useForm } from '@mantine/form'
@@ -8,6 +8,9 @@ import { useForm } from '@mantine/form'
 const App = () => {
   const [seconds, setSeconds] = useState(0)
   const inputRef = useRef(null)
+  useEffect(() => {
+    document.title = `Timer ${toTimeString(seconds)}`
+  })
 
   const toTimeString = (s) => new Date(s * 1000).toISOString().substring(11, 19)
 
