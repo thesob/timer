@@ -9,7 +9,7 @@ const App = () => {
   const [seconds, setSeconds] = useState(0)
   const inputRef = useRef(null)
   useEffect(() => {
-    document.title = `Timer ${toTimeString(seconds)}`
+    document.title = `Timer - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
   })
 
   const toTimeString = (s) => new Date(s * 1000).toISOString().substring(11, 19)
