@@ -11,8 +11,8 @@ const App = () => {
   useEffect(() => {
     document.title = `Timer - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
   })
-
-  const toTimeString = (s) => `${~~(s / 3600)}:${~~((s % 3600) / 60)}:${s % 60}`
+  const padify = (number) => String(number).padStart(2, '0')
+  const toTimeString = (s) => `${padify(~~(s / 3600))}:${padify(~~((s % 3600) / 60))}:${padify(s % 60)}`
 
   const handleIntervalTick = () => setSeconds((s) => s + 1)
   const interval = useInterval(handleIntervalTick, 1000)
@@ -33,7 +33,7 @@ const App = () => {
       duration: '00:00:00'
     },
     validate: {
-      duration: (value) => /^\d\d:[0-5]\d:[0-5]\d$/.test(value) ? null : 'Must be hh:mm:ss, \nwhere mm & ss are < 60'
+      duration: (value) => /^\d+:[0-5]\d:[0-5]\d$/.test(value) ? null : 'Must be hours:mm:ss, \nwhere mm & ss are < 60'
     }
   })
 
