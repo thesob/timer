@@ -91,7 +91,7 @@ const App = () => {
         <ul style={interval.active ? { color: 'lightgray' } : { color: 'gray' }}>
           <li>Format is hours:mm:ss</li>
           <li>Hours can be unlimited</li>
-          <li>Minutes and seconds less than 60</li>
+          <li>Min and sec less than 60</li>
         </ul>
       </form>
     </Stack>
