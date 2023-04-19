@@ -12,7 +12,7 @@ const App = () => {
     document.title = `Timer - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
   })
 
-  const toTimeString = (s) => new Date(s * 1000).toISOString().substring(11, 19)
+  const toTimeString = (s) => `${~~(s / 3600)}:${~~((s % 3600) / 60)}:${s % 60}`
 
   const handleIntervalTick = () => setSeconds((s) => s + 1)
   const interval = useInterval(handleIntervalTick, 1000)
