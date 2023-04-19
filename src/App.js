@@ -33,7 +33,7 @@ const App = () => {
       duration: '00:00:00'
     },
     validate: {
-      duration: (value) => /^\d+:[0-5]\d:[0-5]\d$/.test(value) ? null : 'Must be hours:mm:ss, \nwhere mm & ss are < 60'
+      duration: (value) => /^\d+:[0-5]\d:[0-5]\d$/.test(value) ? null : 'Must be hours:mm:ss'
     }
   })
 
@@ -88,6 +88,11 @@ const App = () => {
             Set
           </Button>
         </Flex>
+        <ul style={interval.active ? { color: 'lightgray' } : { color: 'gray' }}>
+          <li>Format is hours:mm:ss</li>
+          <li>Hours can be unlimited</li>
+          <li>Minutes and seconds less than 60</li>
+        </ul>
       </form>
     </Stack>
   );
