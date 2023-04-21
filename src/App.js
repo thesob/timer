@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useRef, useEffect } from 'react';
 import { useInterval } from '@mantine/hooks';
-import { Stack, Button, TextInput, Title, Flex, Accordion, Text } from '@mantine/core';
+import { Stack, Button, TextInput, Title, Flex, Accordion, Text, Footer } from '@mantine/core';
 import { useForm } from '@mantine/form'
 
 const App = () => {
@@ -55,7 +55,7 @@ const App = () => {
         styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center', marginTop: 20 }, label: { color: 'gray' } }}
         disabled={interval.active}
         onChange={e => setProject(e.currentTarget.value)} value={project}
-      />
+        />
       <img src={logo} className="App-logo" alt="logo" width={350}/>
       <Title order={1} c='darkgray'>{toTimeString(seconds)}</Title>
       <Button
@@ -64,7 +64,7 @@ const App = () => {
         radius="lg"
         size="lg"
         onClick={handleClick}
-      >
+        >
         {interval.active ? 'Stop' : 'Start'} counting
       </Button>
       <Accordion variant="default" radius="md">
@@ -83,7 +83,7 @@ const App = () => {
                 disabled={interval.active}
                 onChange={e => setSeconds(toTimeString(e.target.value))}
                 {...form.getInputProps('duration')}
-              />
+                />
               <Button
                 variant="light"
                 radius="md"
@@ -92,7 +92,7 @@ const App = () => {
                 onClick={() => setSeconds(toSecondsFromDuration(inputRef.current.value))}
                 disabled={!form.isValid() || interval.active}
                 compact
-              >
+                >
                 Set
               </Button>
             </Flex>
@@ -104,6 +104,7 @@ const App = () => {
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
+      <Footer><a href='https://github.com/thesob/timer' target='blank' rel='external'>Github</a></Footer>
     </Stack>
   );
 }
