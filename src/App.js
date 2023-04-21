@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useRef, useEffect } from 'react';
 import { useInterval } from '@mantine/hooks';
-import { Stack, Button, TextInput, Title, Text, Flex, Accordion } from '@mantine/core';
+import { Stack, Button, TextInput, Title, Flex, Accordion, Text } from '@mantine/core';
 import { useForm } from '@mantine/form'
 
 const App = () => {
@@ -49,10 +49,9 @@ const App = () => {
   return (
     <Stack align="center">
       <TextInput
-        //label='Project'
         radius="lg"
         size="xl"
-        variant="filled"
+        //variant="filled"
         styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center', marginTop: 20 }, label: { color: 'gray' } }}
         disabled={interval.active}
         onChange={e => setProject(e.currentTarget.value)} value={project}
@@ -65,13 +64,12 @@ const App = () => {
         radius="lg"
         size="lg"
         onClick={handleClick}
-      //disabled={!form.isValid()}
       >
         {interval.active ? 'Stop' : 'Start'} counting
       </Button>
-      <Accordion variant="default" radius="md" defaultValue="customization">
+      <Accordion variant="default" radius="md">
         <Accordion.Item value="customization">
-          <Accordion.Control>Set start time</Accordion.Control>
+          <Accordion.Control><Text color='dimmed'>Set start time</Text></Accordion.Control>
           <Accordion.Panel>
             <Flex gap='md'>
               <TextInput
