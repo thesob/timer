@@ -44,6 +44,11 @@ const App = () => {
     window.sessionStorage.setItem(SESSION_PROJECT_NAME, value)
   }
 
+  const handleReset = () => {
+    setSeconds(0)
+    inputRef.current.value = '00:00:00'
+  }
+
   const padify = (number) => String(number).padStart(2, '0')
   const toTimeString = (s) => `${padify(~~(s / 3600))}:${padify(~~((s % 3600) / 60))}:${padify(s % 60)}`
 
@@ -104,7 +109,7 @@ const App = () => {
                 variant="filled"
                 styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center' }, label: { color: 'gray' } }}
                 disabled={interval.active}
-                onChange={e => setSeconds(toTimeString(e.target.value))}
+                //onChange={e => setSeconds(toTimeString(e.target.value))}
                 {...form.getInputProps('duration')}
                 />
               <Button
@@ -115,8 +120,21 @@ const App = () => {
                 onClick={() => setSeconds(toSecondsFromDuration(inputRef.current.value))}
                 disabled={!form.isValid() || interval.active}
                 compact
+                title='Set main counter to duration in field'
                 >
                 Set
+              </Button>
+              <Button
+                variant="light"
+                radius="md"
+                size="s"
+                color='gray'
+                onClick={handleReset}
+                disabled={!form.isValid() || interval.active}
+                compact
+                title='Set counter to 0'
+                >
+                0
               </Button>
             </Flex>
             <ul style={interval.active ? { color: 'lightgray' } : { color: 'gray' }}>
