@@ -26,6 +26,18 @@ const App = () => {
 
   useEffect(() => {
     window.sessionStorage.setItem(SESSION_COUNT, seconds)
+    const residual = seconds % 3600
+    // console.log('residual', residual)
+    if ( residual === 0) {
+      const hours  = ~~(seconds / 3600)
+      console.log('hour elapsed:', hours)
+      const voiceMsg = `${hours} ${hours > 1 ? 'hours' : 'hour'}`
+      console.log(voiceMsg)
+      const utterance = new SpeechSynthesisUtterance(voiceMsg)
+      const voices = speechSynthesis.getVoices()
+      utterance.voice = voices[0]
+      speechSynthesis.speak(utterance)
+    }
   }, [seconds])
 
   const handleIntervalTick = () => {
