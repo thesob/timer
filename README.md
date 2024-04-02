@@ -1,13 +1,15 @@
-# Simple timer app
+# Simple time counter app
 
-A timer app to keep track of elapsed time in a project. You start the timer when you start working on the project and stop it when you change project. The timer can be set to start on any time, and the project name can be changed.
+A time counter app to keep track of elapsed time in a project. You start the timer when you start working on the project and stop it when you change project. The timer can be set to start on any time, and the project name can be changed.
 I used it to keep track of time dedicated to solve exercises for the Open Fullstack Javascript course at Helskinki University. https://fullstackopen.com/en/
+It's totally written in React, uses session storage to store project name and seconds lapsed. Doesn't use cookies, nor has any connection to external storage (database or other repository).
+Tracks different times on a tab basis, i.e. you can keep track of different projects, one project per tab. Browser agnostic as to React limitations.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Steps to clone it
+# Public Url
 A production deployment is available at [Timer@CloudfarePages](https://timer-8lb.pages.dev/)
 
-# Steps to clone it
+# Steps to clone the project
 You need to have pre-installed the node package manage [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 1. Clone this repo to your local drive:
