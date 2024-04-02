@@ -11,7 +11,7 @@ export const SESSION_COUNT = 'count'
 const App = () => {
   const [seconds, setSeconds] = useState(0)
   const inputRef = useRef(null)
-  const [project, setProject] = useState('Timer')
+  const [project, setProject] = useState('Project X')
 
   useEffect(() => {
     document.title = `${project} - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
@@ -32,19 +32,23 @@ const App = () => {
     setSeconds((s) => s + 1)
   }
 
-  const handleClick = () => {
+  const handleStartBtnClick = () => {
     const newCountingState = !interval.active
     document.documentElement.style.setProperty('--logo-animation-state', `${newCountingState ? 'running' : 'paused'}`);
     interval.toggle()
   }
 
-  const handleChange = (e) => {
+  const handleProjectNameChange = (e) => {
     const value = e.currentTarget.value
     setProject(value)
     window.sessionStorage.setItem(SESSION_PROJECT_NAME, value)
   }
 
-  const handleReset = () => {
+  const handleSetBtnClick = () => {
+    setSeconds(toSecondsFromDuration(inputRef.current.value))
+  }
+
+  const handleResetBtnClick = () => {
     setSeconds(0)
     inputRef.current.value = '00:00:00'
   }
@@ -81,7 +85,7 @@ const App = () => {
         size="xl"
         styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center', marginTop: 20 }, label: { color: 'gray' } }}
         disabled={interval.active}
-        onChange={handleChange}
+        onChange={handleProjectNameChange}
         value={project}
         />
       <img src={logo} className="App-logo" alt="logo" width={350}/>
@@ -91,7 +95,7 @@ const App = () => {
         color={interval.active ? 'red' : 'teal'}
         radius="lg"
         size="lg"
-        onClick={handleClick}
+        onClick={handleStartBtnClick}
         >
         {interval.active ? 'Stop' : 'Start'} counting
       </Button>
@@ -117,7 +121,7 @@ const App = () => {
                 radius="md"
                 size="s"
                 color='gray'
-                onClick={() => setSeconds(toSecondsFromDuration(inputRef.current.value))}
+                onClick={handleSetBtnClick}
                 disabled={!form.isValid() || interval.active}
                 compact
                 title='Set main counter to duration in field'
@@ -129,12 +133,12 @@ const App = () => {
                 radius="md"
                 size="s"
                 color='gray'
-                onClick={handleReset}
+                onClick={handleResetBtnClick}
                 disabled={!form.isValid() || interval.active}
                 compact
                 title='Set counter to 0'
                 >
-                0
+                Reset
               </Button>
             </Flex>
             <ul style={interval.active ? { color: 'lightgray' } : { color: 'gray' }}>
