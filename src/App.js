@@ -1,44 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState, useRef, useEffect } from 'react';
-import { useInterval } from '@mantine/hooks';
-import { Stack, Button, TextInput, Title, Flex, Accordion, Text, Footer } from '@mantine/core';
+import logo from './images/PS_logo.png'
+import './App.css'
+import { useState, useRef, useEffect } from 'react'
+import { useInterval } from '@mantine/hooks'
+import { Stack, Button, TextInput, Title, Flex, Accordion, Text, Footer, Checkbox } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import Clock from './components/Clock'
 
 export const SESSION_PROJECT_NAME = 'pname'
 export const SESSION_COUNT = 'count'
+export const SESSION_HOURLY_NOTIFICATION = 'hourly_sound'
+
 
 const App = () => {
   const [seconds, setSeconds] = useState(0)
   const inputRef = useRef(null)
   const [project, setProject] = useState('Project X')
-
-  useEffect(() => {
-    document.title = `${project} - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
-  })
+  const [hourlyNotification, setHourlyNotification] = useState(false);
 
   useEffect(() => {
     const sName = window.sessionStorage.getItem(SESSION_PROJECT_NAME)
     const sCount = window.sessionStorage.getItem(SESSION_COUNT)
+    const sHourlyNotification = window.sessionStorage.getItem(SESSION_HOURLY_NOTIFICATION)
     sName && setProject(sName)
     sCount && setSeconds(Number.parseInt(sCount))
+    sHourlyNotification && setHourlyNotification(sHourlyNotification)
   }, [])
-
+  
   useEffect(() => {
+    document.title = `${project} - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
     window.sessionStorage.setItem(SESSION_COUNT, seconds)
+    if (!hourlyNotification) return
     const residual = seconds % 3600
-    // console.log('residual', residual)
-    if ( residual === 0) {
+    if ( residual === 0 && seconds > 0) {
       const hours  = ~~(seconds / 3600)
-      console.log('hour elapsed:', hours)
-      const voiceMsg = `${hours} ${hours > 1 ? 'hours' : 'hour'}`
-      console.log(voiceMsg)
+      // console.log('hour elapsed:', hours)
+      const voiceMsg = `${hours} ${hours > 1 ? 'hours' : 'hour'} elapsed`
+      // console.log(voiceMsg)
       const utterance = new SpeechSynthesisUtterance(voiceMsg)
       const voices = speechSynthesis.getVoices()
       utterance.voice = voices[0]
       speechSynthesis.speak(utterance)
     }
-  }, [seconds])
+  })
 
   const handleIntervalTick = () => {
     setSeconds((s) => s + 1)
@@ -47,6 +50,7 @@ const App = () => {
   const handleStartBtnClick = () => {
     const newCountingState = !interval.active
     document.documentElement.style.setProperty('--logo-animation-state', `${newCountingState ? 'running' : 'paused'}`);
+    document.documentElement.style.setProperty('--hands-animation-state', `${newCountingState ? 'running' : 'paused'}`);
     interval.toggle()
   }
 
@@ -54,6 +58,12 @@ const App = () => {
     const value = e.currentTarget.value
     setProject(value)
     window.sessionStorage.setItem(SESSION_PROJECT_NAME, value)
+  }
+
+  const handleHourlyNotificationChange = (e) => {
+    const value = e.currentTarget.checked
+    setHourlyNotification(value)
+    window.sessionStorage.setItem(SESSION_HOURLY_NOTIFICATION, value)
   }
 
   const handleSetBtnClick = () => {
@@ -100,7 +110,8 @@ const App = () => {
         onChange={handleProjectNameChange}
         value={project}
         />
-      <img src={logo} className="App-logo" alt="logo" width={350}/>
+      <img src={logo} className="App-logo" alt="logo" />
+      <Clock counter={seconds} />
       <Title order={1} c='darkgray'>{toTimeString(seconds)}</Title>
       <Button
         variant="outline"
@@ -113,7 +124,7 @@ const App = () => {
       </Button>
       <Accordion variant="default" radius="md">
         <Accordion.Item value="customization">
-          <Accordion.Control><Text color='dimmed'>Set start time</Text></Accordion.Control>
+          <Accordion.Control><Text color='dimmed'>Settings</Text></Accordion.Control>
           <Accordion.Panel>
             <Flex gap='md'>
               <TextInput
@@ -158,6 +169,12 @@ const App = () => {
               <li>Hours can be unlimited</li>
               <li>Min and sec less than 60</li>
             </ul>
+            <Checkbox 
+              checked={hourlyNotification}
+              label='Hourly sound alert'
+              onChange={handleHourlyNotificationChange}
+              styles={{label: {color:'gray'}}}
+            />
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
