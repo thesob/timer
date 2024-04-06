@@ -2,7 +2,7 @@ import logo from './images/PS_logo.png'
 import './App.css'
 import { useState, useRef, useEffect } from 'react'
 import { useInterval } from '@mantine/hooks'
-import { Stack, Button, TextInput, Title, Flex, Accordion, Text, Footer, Checkbox } from '@mantine/core'
+import { Stack, Button, TextInput, Flex, Accordion, Text, Footer, Checkbox, Code} from '@mantine/core'
 import { useForm } from '@mantine/form'
 import Clock from './components/Clock'
 
@@ -20,14 +20,14 @@ const App = () => {
   useEffect(() => {
     const sName = window.sessionStorage.getItem(SESSION_PROJECT_NAME)
     const sCount = window.sessionStorage.getItem(SESSION_COUNT)
-    const sHourlyNotification = window.sessionStorage.getItem(SESSION_HOURLY_NOTIFICATION)
+    const sHourlyNotification = window.sessionStorage.getItem(SESSION_HOURLY_NOTIFICATION) === 'true'
     sName && setProject(sName)
     sCount && setSeconds(Number.parseInt(sCount))
     sHourlyNotification && setHourlyNotification(sHourlyNotification)
   }, [])
   
   useEffect(() => {
-    document.title = `${project} - ${interval.active ? 'Running' : 'Stopped'} | ${toTimeString(seconds)}`
+    document.title = `${project} - ${interval.active ? '🏃' : '✋'} | ${toTimeString(seconds)}`
     window.sessionStorage.setItem(SESSION_COUNT, seconds)
     if (!hourlyNotification) return
     const residual = seconds % 3600
@@ -102,17 +102,21 @@ const App = () => {
 
   return (
     <Stack align="center">
-      <TextInput
-        radius="lg"
-        size="xl"
-        styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center', marginTop: 20 }, label: { color: 'gray' } }}
-        disabled={interval.active}
-        onChange={handleProjectNameChange}
-        value={project}
-        />
-      <img src={logo} className="App-logo" alt="logo" />
+      <Flex 
+        align='center'
+        gap='lg'>
+        <img src={logo} className="App-logo" alt="logo" />
+        <TextInput
+          radius="lg"
+          size="xl"
+          styles={{ input: { textAlign: 'center', color: 'gray' }, root: { textAlign: 'center', marginTop: 20 }, label: { color: 'gray' } }}
+          disabled={interval.active}
+          onChange={handleProjectNameChange}
+          value={project}
+          />
+      </Flex>
       <Clock counter={seconds} />
-      <Title order={1} c='darkgray'>{toTimeString(seconds)}</Title>
+      <Code c='darkgray'><h1 style={{fontSize: "33px", fontWeight: 'bolder', lineHeight: '0.2'}}>{toTimeString(seconds)}</h1></Code>
       <Button
         variant="outline"
         color={interval.active ? 'red' : 'teal'}

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import './clock.css'
 import hour_hand from "../images/hours_hand_38x173_19x156.webp";
 import minute_hand from "../images/minutes_hand_38x231_18x213.webp";
 import second_hand from "../images/seconds_hand_24x236_12x177.webp";
@@ -9,7 +10,7 @@ const Clock = ({ counter }) => {
   const secondsRef = useRef(null);
 
   useEffect(() => {
-    console.log(counter);
+    // console.log(counter);
     const seconds = counter % 60;
     const minutes = (counter % 3600) / 60;
     const hours = counter / 3600;
