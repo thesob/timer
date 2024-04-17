@@ -34,7 +34,7 @@ const App = () => {
     if ( residual === 0 && seconds > 0) {
       const hours  = ~~(seconds / 3600)
       // console.log('hour elapsed:', hours)
-      const voiceMsg = `${hours} ${hours > 1 ? 'hours' : 'hour'} elapsed`
+      const voiceMsg = `${hours} ${hours > 1 ? 'hours' : 'hour'} elapsed on task ${project}`
       // console.log(voiceMsg)
       const utterance = new SpeechSynthesisUtterance(voiceMsg)
       const voices = speechSynthesis.getVoices()
