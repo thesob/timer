@@ -43,6 +43,11 @@
     position: absolute;
   }
   
+  .close_button {
+    position: absolute;
+    left: 100%;
+    
+  }
   /* 
   #clock {
     background: #fff url('./images/24_hours_clock_face_540x540.webp') no-repeat center;

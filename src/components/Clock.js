@@ -36,25 +36,25 @@ const Clock = ({ counter, visible = true }) => {
 
   return (
       <>
-      <CloseButton onClick={handleClick}/>
-      {isVisible 
-      ?
-      (
-        <div id="clock">
-          <div id="hours_container" ref={hoursRef}>
-            <img src={hour_hand} id="hours_img" alt="Hour hand" />
+        <CloseButton className='close_button' onClick={handleClick}/>
+        {isVisible 
+        ?
+        (
+          <div id="clock">
+            <div id="hours_container" ref={hoursRef}>
+              <img src={hour_hand} id="hours_img" alt="Hour hand" />
+            </div>
+            <div id="minutes_container" ref={minutesRef}>
+              <img src={minute_hand} id="minutes_img" alt="Minute hand" />
+            </div>
+            <div id="seconds_container" ref={secondsRef}>
+              <img src={second_hand} id="seconds_img" alt="Second hand" />
+            </div>
           </div>
-          <div id="minutes_container" ref={minutesRef}>
-            <img src={minute_hand} id="minutes_img" alt="Minute hand" />
-          </div>
-          <div id="seconds_container" ref={secondsRef}>
-            <img src={second_hand} id="seconds_img" alt="Second hand" />
-          </div>
-         </div>
-      ) 
-      : null}
+        ) 
+        : null}
       </>
-  );
-};
+  )
+}
 
-export default Clock;
+export default Clock

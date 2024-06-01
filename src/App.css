@@ -8,6 +8,7 @@
   animation-play-state: var(--logo-animation-state);
   position: relative;
   top: 10px;
+  left: 10px;
 
 }
 
