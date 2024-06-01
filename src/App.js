@@ -118,13 +118,13 @@ const App = () => {
       <Clock counter={seconds} />
       <Code c='darkgray'><h1 style={{fontSize: "33px", fontWeight: 'bolder', lineHeight: '0.2'}}>{toTimeString(seconds)}</h1></Code>
       <Button
-        variant="outline"
+        variant="filled"
         color={interval.active ? 'red' : 'teal'}
         radius="lg"
-        size="lg"
+        size="compact-lg"
         onClick={handleStartBtnClick}
         >
-        {interval.active ? 'Stop' : 'Start'} counting
+        {interval.active ? 'Stop' : 'Start'}
       </Button>
       <Accordion variant="default" radius="md">
         <Accordion.Item value="customization">

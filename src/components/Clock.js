@@ -5,11 +5,11 @@ import minute_hand from "../images/minutes_hand_38x231_18x213.webp"
 import second_hand from "../images/seconds_hand_24x236_12x177.webp"
 import { CloseButton } from "@mantine/core"
 
-const Clock = ({ counter }) => {
+const Clock = ({ counter, visible = true }) => {
   const hoursRef = useRef(null)
   const minutesRef = useRef(null)
   const secondsRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(visible)
 
   useEffect(() => {
     if (!isVisible) return
