@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   Button,
   Checkbox,
   Flex,
@@ -7,6 +8,7 @@ import {
 import { useForm } from "@mantine/form";
 import Stopwatch from "./Stopwatch";
 import { toSecondsFromDuration, toTimeString } from "../utils/utils";
+import { FaCheck } from "react-icons/fa6";
 
 const StopwatchSettings = ({
   seconds,
@@ -24,11 +26,6 @@ const StopwatchSettings = ({
 
   const handleSetBtnClick = () => {
     setSeconds(toSecondsFromDuration(inputRef.current.value));
-  };
-
-  const handleResetBtnClick = () => {
-    setSeconds(0);
-    inputRef.current.value = "00:00:00";
   };
 
   const form = useForm({
@@ -50,7 +47,7 @@ const StopwatchSettings = ({
           name="duration"
           value={toTimeString(seconds)}
           radius="lg"
-          size="l"
+          size="md"
           variant="filled"
           styles={{
             input: { textAlign: "center", color: "gray" },
@@ -61,30 +58,15 @@ const StopwatchSettings = ({
           //onChange={e => setSeconds(toTimeString(e.target.value))}
           {...form.getInputProps("duration")}
         />
-        <Button
-          variant="light"
-          radius="md"
-          size="s"
-          color="gray"
-          onClick={handleSetBtnClick}
-          disabled={!form.isValid() || interval.active}
-          compact
-          title="Set main counter to duration in field"
+        <ActionIcon
+            variant="light"
+            radius="lg"
+            size="xl"
+            aria-label="Set"
+            onClick={handleSetBtnClick}
         >
-          Set
-        </Button>
-        <Button
-          variant="light"
-          radius="md"
-          size="s"
-          color="gray"
-          onClick={handleResetBtnClick}
-          disabled={!form.isValid() || interval.active}
-          compact
-          title="Set counter to 0"
-        >
-          Reset
-        </Button>
+          <FaCheck style={{ width: "70%", height: "70%" }} />
+        </ActionIcon>
       </Flex>
       <ul style={interval.active ? { color: "lightgray" } : { color: "gray" }}>
         <li>Format is hours:mm:ss</li>

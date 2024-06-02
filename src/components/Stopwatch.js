@@ -16,7 +16,7 @@ import {
   SESSION_PROJECT_NAME_BASE,
   toTimeString,
 } from "../utils/utils";
-import { FaPlay, FaStop } from "react-icons/fa6";
+import { FaCreativeCommonsZero, FaPlay, FaStop } from "react-icons/fa6";
 import { IoEye, IoEyeOff, IoSettingsSharp } from "react-icons/io5";
 
 const Stopwatch = ({ defaultName, id, clockVisible=true }) => {
@@ -81,13 +81,17 @@ const Stopwatch = ({ defaultName, id, clockVisible=true }) => {
     window.sessionStorage.setItem(SESSION_PROJECT_NAME, value);
   }
 
+  const handleResetBtnClick = () => {
+    setSeconds(0);
+  };
+
   const handleEyeBtnClick = () => {
     setIsClockVisible(!isClockVisible)
   }
   const interval = useInterval(handleIntervalTick, 1000);
 
   return (
-    <Stack align="center">
+    <Stack align="center" gap='sm'>
       <TextInput
         radius="lg"
         size="sm"
@@ -158,6 +162,15 @@ const Stopwatch = ({ defaultName, id, clockVisible=true }) => {
               />
             </Popover.Dropdown>
           </Popover>
+          <ActionIcon
+            variant="light"
+            radius="lg"
+            size="xl"
+            aria-label="Reset"
+            onClick={handleResetBtnClick}
+          >
+            <FaCreativeCommonsZero style={{ width: "70%", height: "70%" }} />
+          </ActionIcon>
           <ActionIcon
             variant="light"
             radius="lg"
