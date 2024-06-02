@@ -19,12 +19,12 @@ import {
 import { FaPlay, FaStop } from "react-icons/fa6";
 import { IoEye, IoEyeOff, IoSettingsSharp } from "react-icons/io5";
 
-const Stopwatch = ({ defaultName, id }) => {
+const Stopwatch = ({ defaultName, id, clockVisible=true }) => {
   const [seconds, setSeconds] = useState(0);
   const [projectName, setProjectName] = useState(defaultName);
   const inputRef = useRef(null);
   const [hourlyNotification, setHourlyNotification] = useState(false);
-  const [isClockVisible, setIsClockVisible] = useState(true)
+  const [isClockVisible, setIsClockVisible] = useState(clockVisible)
 
   const addIdTo = (label) => label + "_" + id;
   const SESSION_COUNT = addIdTo(SESSION_COUNT_BASE);
@@ -70,10 +70,6 @@ const Stopwatch = ({ defaultName, id }) => {
     const newCountingState = !interval.active;
     document.documentElement.style.setProperty(
       "--logo-animation-state",
-      `${newCountingState ? "running" : "paused"}`
-    );
-    document.documentElement.style.setProperty(
-      "--hands-animation-state",
       `${newCountingState ? "running" : "paused"}`
     );
     interval.toggle();
