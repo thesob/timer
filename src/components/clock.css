@@ -1,87 +1,54 @@
 #clock {
-    background: #fff url('../images/24_hours_clock_face_540x540.webp') no-repeat center;
-    background-position: 0.24% 1.07%;
-    height: 51.5vmin;
-    width: 51.5vmin;
-    background-size: 100% 100%;
-    position: relative;
-    max-width: 405px;
-    max-height: 405px;
-  }
-  
-  #seconds_container, #minutes_container, #hours_container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    animation-play-state: var(--hands-animation-state);
-  }
-  
-  #hours_img {
-    width: 7%;
-    height: 32%;
-    left: 46.4%;
-    top: 21.1%;
-    position: absolute;
-  }
-  
-  #minutes_img {
-    width: 7%;
-    height: 42.8%;
-    left: 46.7%;
-    top: 10.5%;
-    position: absolute;
-  }
-  
-  #seconds_img {
-    width: 4.4%;
-    height: 43.7%;
-    left: 47.8%;
-    top: 17.4%;
-    position: absolute;
-  }
-  
-  .close_button {
-    position: absolute;
-    left: 100%;
-    
-  }
-  /* 
-  #clock {
-    background: #fff url('./images/24_hours_clock_face_540x540.webp') no-repeat center;
-    background-position: 1.3px 5.8px;
-    height: 540px;
-    width: 540px;
-    background-size: 100% 100%
-    position: relative;
-    max-width: 405px;
-    max-height: 405px;
-  }
-  
-  #hours_img {
-    width: 38px;
-    height: 173px;
-    left: 250.8px;
-    top: 114.2px;
-    position: absolute;
-  }
-  
-  #minutes_img {
-    width: 38px;
-    height: 231px;
-    left: 252.3px;
-    top: 56.5px;
-    position: absolute;
-  }
-  
-  #seconds_img {
-    width: 24px;
-    height: 236px;
-    left: 258px;
-    top: 94px;
-    position: absolute;
-  } */
-  
-  
+  background: #fff url("../images/24_hours_clock_face_540x540.webp") no-repeat
+    center;
+  background-position: 0.24% 1.07%;
+  height: 51.5vmin;
+  width: 51.5vmin;
+  background-size: 100% 100%;
+  position: relative;
+  max-width: 405px;
+  max-height: 405px;
+  min-width: none;
+  min-height: auto;
+}
+
+#seconds_container,
+#minutes_container,
+#hours_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  animation-play-state: var(--hands-animation-state);
+}
+
+#hours_img {
+  width: 7%;
+  height: 32%;
+  left: 46.4%;
+  top: 21.1%;
+  position: absolute;
+}
+
+#minutes_img {
+  width: 7%;
+  height: 42.8%;
+  left: 46.7%;
+  top: 10.5%;
+  position: absolute;
+}
+
+#seconds_img {
+  width: 4.4%;
+  height: 43.7%;
+  left: 47.8%;
+  top: 17.4%;
+  position: absolute;
+}
+
+.close_button {
+  position: absolute;
+  left: 100%;
+}

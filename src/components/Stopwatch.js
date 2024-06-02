@@ -1,4 +1,11 @@
-import { Button, Code, Stack, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Code,
+  Flex,
+  Popover,
+  Stack,
+  TextInput,
+} from "@mantine/core";
 import Clock from "./Clock";
 import { useEffect, useRef, useState } from "react";
 import { useInterval } from "@mantine/hooks";
@@ -9,12 +16,16 @@ import {
   SESSION_PROJECT_NAME_BASE,
   toTimeString,
 } from "../utils/utils";
+import { FaPlay, FaStop } from "react-icons/fa6";
+import { IoEye, IoEyeOff, IoSettingsSharp } from "react-icons/io5";
 
 const Stopwatch = ({ defaultName, id }) => {
   const [seconds, setSeconds] = useState(0);
   const [projectName, setProjectName] = useState(defaultName);
   const inputRef = useRef(null);
   const [hourlyNotification, setHourlyNotification] = useState(false);
+  const [isClockVisible, setIsClockVisible] = useState(true)
+
   const addIdTo = (label) => label + "_" + id;
   const SESSION_COUNT = addIdTo(SESSION_COUNT_BASE);
   const SESSION_HOURLY_NOTIFICATION = addIdTo(SESSION_HOURLY_NOTIFICATION_BASE);
@@ -72,15 +83,18 @@ const Stopwatch = ({ defaultName, id }) => {
     const value = e.currentTarget.value;
     setProjectName(value);
     window.sessionStorage.setItem(SESSION_PROJECT_NAME, value);
-  };
+  }
 
+  const handleEyeBtnClick = () => {
+    setIsClockVisible(!isClockVisible)
+  }
   const interval = useInterval(handleIntervalTick, 1000);
 
   return (
-    <Stack align="center" style={{ position: "absolute", top: 0, left: "25%" }}>
+    <Stack align="center">
       <TextInput
         radius="lg"
-        size="xl"
+        size="sm"
         styles={{
           input: { textAlign: "center", color: "gray" },
           root: { textAlign: "center", marginTop: 20 },
@@ -90,12 +104,15 @@ const Stopwatch = ({ defaultName, id }) => {
         onChange={handleProjectNameChange}
         value={projectName}
       />
-      <Stack>
-        <Clock counter={seconds} />
+      <Stack align="center">
+        {isClockVisible
+          ? <Clock counter={seconds} />
+          : null
+        }
         <Code c="darkgray">
           <h1
             style={{
-              fontSize: "33px",
+              fontSize: "30px",
               fontWeight: "bolder",
               lineHeight: "0.2",
             }}
@@ -103,24 +120,63 @@ const Stopwatch = ({ defaultName, id }) => {
             {toTimeString(seconds)}
           </h1>
         </Code>
-        <Button
-          variant="filled"
-          color={interval.active ? "red" : "teal"}
-          radius="lg"
-          size="compact-lg"
-          onClick={handleStartBtnClick}
-        >
-          {interval.active ? "Stop" : "Start"}
-        </Button>
+        <Flex direction="row">
+          <ActionIcon
+            variant="light"
+            radius="lg"
+            size="xl"
+            aria-label="Start/Stop"
+            onClick={handleStartBtnClick}
+          >
+            {interval.active ? (
+              <FaStop style={{ width: "70%", height: "70%" }} />
+            ) : (
+              <FaPlay style={{ width: "70%", height: "70%" }} />
+            )}
+          </ActionIcon>
+          <Popover
+            width={300}
+            trapFocus
+            position="bottom"
+            withArrow
+            shadow="md"
+          >
+            <Popover.Target>
+              <ActionIcon
+                  variant="light"
+                  radius="lg"
+                  size="xl"
+                  aria-label="Clock On/Off"
+              >
+                <IoSettingsSharp style={{ width: "70%", height: "70%" }} />
+              </ActionIcon>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <StopwatchSettings
+                inputRef={inputRef}
+                seconds={seconds}
+                setSeconds={setSeconds}
+                interval={interval}
+                hourlyNotification={hourlyNotification}
+                setHourlyNotification={setHourlyNotification}
+              />
+            </Popover.Dropdown>
+          </Popover>
+          <ActionIcon
+            variant="light"
+            radius="lg"
+            size="xl"
+            aria-label="Clock On/Off"
+            onClick={handleEyeBtnClick}
+          >
+            {isClockVisible ? (
+              <IoEyeOff style={{ width: "70%", height: "70%" }} />
+            ) : (
+              <IoEye style={{ width: "70%", height: "70%" }} />
+            )}
+          </ActionIcon>
+        </Flex>
       </Stack>
-      <StopwatchSettings
-        inputRef={inputRef}
-        seconds={seconds}
-        setSeconds={setSeconds}
-        interval={interval}
-        hourlyNotification={hourlyNotification}
-        setHourlyNotification={setHourlyNotification}
-      />
     </Stack>
   );
 };

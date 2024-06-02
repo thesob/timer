@@ -3,13 +3,11 @@
 }
 
 .App-logo {
-  height: 50px;
+  height: 40px;
   pointer-events: none;
   animation-play-state: var(--logo-animation-state);
   position: relative;
   top: 10px;
-  left: 10px;
-
 }
 
 @media (prefers-reduced-motion: no-preference) {
