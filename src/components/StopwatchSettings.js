@@ -5,7 +5,6 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import Stopwatch from "./Stopwatch";
 import { toSecondsFromDuration, toTimeString } from "../utils/utils";
 import { FaCheck } from "react-icons/fa6";
 
@@ -14,13 +13,14 @@ const StopwatchSettings = ({
   setSeconds,
   inputRef,
   interval,
+  hourlyNotificationSessionId,
   hourlyNotification,
   setHourlyNotification,
 }) => {
   const handleHourlyNotificationChange = (e) => {
     const value = e.currentTarget.checked;
     setHourlyNotification(value);
-    window.sessionStorage.setItem(Stopwatch.SESSION_HOURLY_NOTIFICATION, value);
+    window.sessionStorage.setItem(hourlyNotificationSessionId, value);
   };
 
   const handleSetBtnClick = () => {

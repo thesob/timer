@@ -10,8 +10,7 @@ const App = () => {
       id: 1, 
       clockVisible: true, 
       tasks:[ 
-        {defaultName: 'Task X1', id: 1_1, parent:1, clockVisible: false},
-        {defaultName: 'Task X2', id: 1_2, parent:1, clockVisible: false},
+        {defaultName: 'Task X1', id: 11, parent:1, clockVisible: false},
       ]
     },
     {
@@ -31,13 +30,14 @@ const App = () => {
   return (
     <Stack align="center" justify="center">
       <img src={logo} className="App-logo" alt="logo" />
-      <Flex direction={"row"} gap={'md'}>
+      <Flex direction={"row"} gap={'lg'}>
         {
           items.map((project) => {
             return (
-              <Stack key={project.id} align="center">
+              <Stack key={project.id} align="center" gap='xl' >
                 <Stopwatch defaultName={project.defaultName} id={project.id} clockVisible={project.clockVisible}/>
-                {
+                { 
+                  project.tasks &&
                   project.tasks.map((task) => 
                     <Stopwatch 
                       key={task.id} 

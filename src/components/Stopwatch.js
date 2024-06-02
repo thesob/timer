@@ -28,9 +28,9 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible=true }) => {
   const [isClockVisible, setIsClockVisible] = useState(clockVisible)
 
   const addIdTo = (label) => label + "_" + id;
+  const SESSION_PROJECT_NAME = addIdTo(SESSION_PROJECT_NAME_BASE);
   const SESSION_COUNT = addIdTo(SESSION_COUNT_BASE);
   const SESSION_HOURLY_NOTIFICATION = addIdTo(SESSION_HOURLY_NOTIFICATION_BASE);
-  const SESSION_PROJECT_NAME = addIdTo(SESSION_PROJECT_NAME_BASE);
   
   const handleIntervalTick = () => {
     setSeconds((s) => s + 1);
@@ -65,7 +65,7 @@ useEffect(() => {
   }
   const listener = Emitter.addListener('StartCounter', onStartCounter)
 
-  return () => { listener.remove()}
+  return () => listener.remove()
   }, [id, interval, parentId])
 
   useEffect(() => {
@@ -112,7 +112,7 @@ useEffect(() => {
   }
 
   return (
-    <Stack align="center" gap='sm'>
+    <Stack align="center">
       <TextInput
         radius="lg"
         size="sm"
@@ -125,7 +125,7 @@ useEffect(() => {
         onChange={handleProjectNameChange}
         value={projectName}
       />
-      <Stack align="center">
+      <Stack align="center" gap='xs' >
         {isClockVisible
           ? <Clock counter={seconds} />
           : null
@@ -178,6 +178,7 @@ useEffect(() => {
                 seconds={seconds}
                 setSeconds={setSeconds}
                 interval={interval}
+                hourlyNotificationSessionId={SESSION_HOURLY_NOTIFICATION}
                 hourlyNotification={hourlyNotification}
                 setHourlyNotification={setHourlyNotification}
               />
