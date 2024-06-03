@@ -1,8 +1,8 @@
-import { ActionIcon, Flex, Stack } from "@mantine/core";
+import { ActionIcon, Divider, Flex, Stack } from "@mantine/core";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import PanelColumn from "./PanelColumn";
-import {SESSION_ITEMS} from '../utils/utils'
+import { SESSION_ITEMS } from "../utils/utils";
 
 const Panel = () => {
   const [items, setItems] = useState([]);
@@ -44,12 +44,15 @@ const Panel = () => {
   return (
     <Flex direction={"row"} gap={"lg"}>
       {items.map((project) => (
-        <PanelColumn
-          key={project.id}
-          items={items}
-          setItems={setItems}
-          project={project}
-        />
+        <div key={project.id}>
+          <Divider size="sm" label={project.defaultName} labelPosition="center" />
+          <PanelColumn
+            key={project.id}
+            items={items}
+            setItems={setItems}
+            project={project}
+          />
+        </div>
       ))}
       <Stack gap="xs">
         <ActionIcon

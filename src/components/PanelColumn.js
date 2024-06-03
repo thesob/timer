@@ -1,10 +1,9 @@
-import { ActionIcon, Group, Stack } from "@mantine/core";
+import { ActionIcon, Divider, Group, Stack } from "@mantine/core";
 import Stopwatch from "./Stopwatch";
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import {SESSION_ITEMS} from '../utils/utils'
+import { SESSION_ITEMS } from "../utils/utils";
 
-const PanelColumn = ({items, setItems, project}) => {
-
+const PanelColumn = ({ items, setItems, project }) => {
   const handleAddTaskClick = () => {
     const nextTaskIndex = project.id * 10 + project.tasks.length + 1;
     const newTask = {
@@ -16,9 +15,8 @@ const PanelColumn = ({items, setItems, project}) => {
     const copy = { ...project };
     copy.tasks = project.tasks.concat(newTask); // add new task to the end
     const newItems = items.map((p) => (p.id !== project.id ? p : copy));
-    console.log(newItems);
     setItems(newItems);
-    window.sessionStorage.setItem(SESSION_ITEMS, JSON.stringify(newItems))
+    window.sessionStorage.setItem(SESSION_ITEMS, JSON.stringify(newItems));
   };
 
   const handleDelTaskClick = () => {
@@ -26,7 +24,7 @@ const PanelColumn = ({items, setItems, project}) => {
     copy.tasks = project.tasks.slice(0, -1);
     const newItems = items.map((p) => (p.id !== project.id ? p : copy));
     setItems(newItems);
-    window.sessionStorage.setItem(SESSION_ITEMS, JSON.stringify(newItems))
+    window.sessionStorage.setItem(SESSION_ITEMS, JSON.stringify(newItems));
   };
 
   return (
@@ -38,13 +36,15 @@ const PanelColumn = ({items, setItems, project}) => {
       />
       {project.tasks &&
         project.tasks.map((task) => (
-          <Stopwatch
-            key={task.id}
-            defaultName={task.defaultName}
-            id={task.id}
-            parentId={task.parentId}
-            clockVisible={task.clockVisible}
-          />
+          <div key={task.id}>
+            <Divider size='sm' label={task.defaultName} labelPosition="center" />
+            <Stopwatch
+              defaultName={task.defaultName}
+              id={task.id}
+              parentId={task.parentId}
+              clockVisible={task.clockVisible}
+            />
+          </div>
         ))}
       <Group>
         <ActionIcon
