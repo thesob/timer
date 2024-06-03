@@ -2,6 +2,7 @@ import {
   ActionIcon,
   Code,
   Flex,
+  Group,
   Popover,
   Stack,
   TextInput,
@@ -20,7 +21,7 @@ import { FaCreativeCommonsZero, FaPlay, FaStop } from "react-icons/fa6";
 import { IoEye, IoEyeOff, IoSettingsSharp } from "react-icons/io5";
 import Emitter from "../utils/Emitter";
 
-const Stopwatch = ({ defaultName, id, parentId, clockVisible = true }) => {
+const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
   const addIdTo = (label) => label + "_" + id;
   const SESSION_PROJECT_NAME = addIdTo(SESSION_PROJECT_NAME_BASE);
   const SESSION_COUNT = addIdTo(SESSION_COUNT_BASE);
@@ -127,18 +128,20 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true }) => {
 
   return (
     <Stack align="center">
-      <TextInput
-        radius="lg"
-        size="sm"
-        styles={{
-          input: { textAlign: "center", color: "gray" },
-          root: { textAlign: "center", marginTop: 20 },
-          label: { color: "gray" },
-        }}
-        disabled={interval.active}
-        onChange={handleProjectNameChange}
-        value={projectName}
-      />
+      <Group align="middle">
+        <TextInput
+          radius="lg"
+          size="sm"
+          styles={{
+            input: { textAlign: "center", color: "gray" },
+            root: { textAlign: "center", marginTop: 20 },
+            label: { color: "gray" },
+          }}
+          disabled={interval.active}
+          onChange={handleProjectNameChange}
+          value={projectName}
+          />
+        </Group>
       <Stack align="center" gap="xs">
         {isClockVisible ? <Clock counter={seconds} /> : null}
         <Code c="darkgray">
