@@ -11,7 +11,7 @@ const App = () => {
     id: 1, 
     clockVisible: true, 
     tasks:[ 
-      // {defaultName: `Task ${11}`, id: 11, parent:1, clockVisible: false},
+      {defaultName: `Task ${11}`, id: 11, parentId:1, clockVisible: false},
     ]
   }])
 
@@ -42,6 +42,7 @@ const App = () => {
       const copy = { ...project }
       copy.tasks = project.tasks.concat(newTask) // add new task to the end
       const newItems = items.map( (p) => p.id !== project.id ? p : copy)
+      console.log(newItems)
       setItems(newItems)
     }
   }
@@ -76,7 +77,7 @@ const App = () => {
                       key={task.id} 
                       defaultName={task.defaultName} 
                       id={task.id} 
-                      parentId={task.parent} 
+                      parentId={task.parentId} 
                       clockVisible={task.clockVisible}
                     />)
                 }
