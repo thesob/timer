@@ -1,6 +1,7 @@
 export const SESSION_PROJECT_NAME_BASE = 'pname'
 export const SESSION_COUNT_BASE = 'count'
 export const SESSION_HOURLY_NOTIFICATION_BASE = 'hourly_sound'
+export const SESSION_ITEMS = "items"
 
 /** Calculates total seconds from a timestamp shaped "HH:mm:ss"
  *  where seconds and minutes need to be less than 60
