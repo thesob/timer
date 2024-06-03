@@ -88,6 +88,7 @@ const App = () => {
                       size="md"
                       aria-label="Add task"
                       onClick={handleAddTaskClick(project)}
+                      disabled={project.tasks.length > 4}
                     >
                       <FaPlus style={{ width: "70%", height: "70%" }} />
                   </ActionIcon>
@@ -97,6 +98,7 @@ const App = () => {
                       size="md"
                       aria-label="Delete task"
                       onClick={handleDelTaskClick(project)}
+                      disabled={ project.tasks.length < 1 }
                     >
                       <FaMinus style={{ width: "70%", height: "70%" }} />
                   </ActionIcon>
@@ -111,7 +113,8 @@ const App = () => {
               size="md"
               aria-label="Add project"
               onClick={handleAddProjectClick}
-            >
+              disabled={ items.length > 4 }
+              >
               <FaPlus style={{ width: "70%", height: "70%" }} />
           </ActionIcon>
           <ActionIcon
@@ -120,6 +123,7 @@ const App = () => {
               size="md"
               aria-label="Delete project"
               onClick={handleDelProjectClick}
+              disabled={ items.length === 1 }
             >
               <FaMinus style={{ width: "70%", height: "70%" }} />
           </ActionIcon>
