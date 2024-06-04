@@ -182,6 +182,7 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
                 radius="lg"
                 size="xl"
                 aria-label="Clock On/Off"
+                disabled={interval.active}
               >
                 <IoSettingsSharp style={{ width: "70%", height: "70%" }} />
               </ActionIcon>
@@ -204,6 +205,7 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
             size="xl"
             aria-label="Reset"
             onClick={handleResetBtnClick}
+            disabled={interval.active}
           >
             <FaCreativeCommonsZero style={{ width: "70%", height: "70%" }} />
           </ActionIcon>

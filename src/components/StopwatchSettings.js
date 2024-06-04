@@ -63,6 +63,7 @@ const StopwatchSettings = ({
             size="xl"
             aria-label="Set"
             onClick={handleSetBtnClick}
+            disabled={interval.active}
         >
           <FaCheck style={{ width: "70%", height: "70%" }} />
         </ActionIcon>
@@ -77,6 +78,7 @@ const StopwatchSettings = ({
         label="Hourly sound alert"
         onChange={handleHourlyNotificationChange}
         styles={{ label: { color: "gray" } }}
+        disabled={interval.active}
       />
     </>
   );
