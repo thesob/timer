@@ -164,7 +164,7 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
             onClick={handleStartBtnClick}
           >
             {interval.active ? (
-              <FaStop style={{ width: "70%", height: "70%" }} />
+              <FaStop style={{ width: "70%", height: "70%", color:'red' }} />
             ) : (
               <FaPlay style={{ width: "70%", height: "70%" }} />
             )}
