@@ -1,4 +1,4 @@
-import { ActionIcon, Divider, Flex, Stack } from "@mantine/core";
+import { ActionIcon, Divider, Flex } from "@mantine/core";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import PanelColumn from "./PanelColumn";
@@ -22,7 +22,7 @@ const Panel = ({direction='row'}) => {
         ]);
   }, []);
 
-  const handleAddProjectClick = ({direction='column'}) => {
+  const handleAddProjectClick = () => {
     const nextIndex = items.length + 1;
     const newItem = {
       defaultName: `Project ${nextIndex}`,
@@ -43,7 +43,7 @@ const Panel = ({direction='row'}) => {
 
   return (
     <>
-    <Flex direction={direction} gap={"lg"}>
+    <Flex direction={direction} gap={"lg"} align={direction === 'row' ? '': 'center'} justify={direction === 'row' ? '': 'center'} >
       {items.map((project) => (
         <div key={project.id}>
           <Divider size="sm" label={project.defaultName} labelPosition="center" />
@@ -56,7 +56,9 @@ const Panel = ({direction='row'}) => {
           />
         </div>
       ))}
-      <Stack gap="xs">
+      <Flex 
+        gap="xs" 
+        direction={direction === 'row' ? 'column' : 'row'}>
         <ActionIcon
           variant="transparent"
           radius="md"
@@ -77,7 +79,7 @@ const Panel = ({direction='row'}) => {
         >
           <FaMinus style={{ width: "70%", height: "70%" }} />
         </ActionIcon>
-      </Stack>
+      </Flex>
     </Flex>
     </>
   );

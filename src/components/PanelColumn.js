@@ -1,4 +1,4 @@
-import { ActionIcon, Divider, Flex, Group } from "@mantine/core";
+import { ActionIcon, Divider, Flex } from "@mantine/core";
 import Stopwatch from "./Stopwatch";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { SESSION_ITEMS } from "../utils/utils";
@@ -46,7 +46,7 @@ const PanelColumn = ({ items, setItems, project, direction='column' }) => {
             />
           </div>
         ))}
-      <Group>
+      <Flex direction={direction === 'row' ? 'column' : 'row' }>
         <ActionIcon
           variant="transparent"
           radius="md"
@@ -67,7 +67,7 @@ const PanelColumn = ({ items, setItems, project, direction='column' }) => {
         >
           <FaMinus style={{ width: "70%", height: "70%" }} />
         </ActionIcon>
-      </Group>
+      </Flex>
     </Flex>
   );
 };
