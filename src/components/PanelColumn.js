@@ -1,9 +1,9 @@
-import { ActionIcon, Divider, Group, Stack } from "@mantine/core";
+import { ActionIcon, Divider, Flex, Group } from "@mantine/core";
 import Stopwatch from "./Stopwatch";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { SESSION_ITEMS } from "../utils/utils";
 
-const PanelColumn = ({ items, setItems, project }) => {
+const PanelColumn = ({ items, setItems, project, direction='column' }) => {
   const handleAddTaskClick = () => {
     const nextTaskIndex = project.id * 10 + project.tasks.length + 1;
     const newTask = {
@@ -28,7 +28,7 @@ const PanelColumn = ({ items, setItems, project }) => {
   };
 
   return (
-    <Stack key={project.id} align="center" gap="xl">
+    <Flex direction={direction} key={project.id} align="center" gap="xl">
       <Stopwatch
         defaultName={project.defaultName}
         id={project.id}
@@ -42,7 +42,7 @@ const PanelColumn = ({ items, setItems, project }) => {
               defaultName={task.defaultName}
               id={task.id}
               parentId={task.parentId}
-              clockVisible={task.clockVisible}
+              clockVisible={direction === 'column' ? task.clockVisible : true}
             />
           </div>
         ))}
@@ -68,7 +68,7 @@ const PanelColumn = ({ items, setItems, project }) => {
           <FaMinus style={{ width: "70%", height: "70%" }} />
         </ActionIcon>
       </Group>
-    </Stack>
+    </Flex>
   );
 };
 

@@ -7,9 +7,13 @@
   pointer-events: none;
   animation-play-state: var(--logo-animation-state);
   position: relative;
-  top: 10px;
+  right: 0;
 }
 
+.main {
+  position: relative;
+  top: 10px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation-name: App-logo-spin;

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PanelColumn from "./PanelColumn";
 import { SESSION_ITEMS } from "../utils/utils";
 
-const Panel = () => {
+const Panel = ({direction='row'}) => {
   const [items, setItems] = useState([]);
   useEffect(() => {
     const sessionItems = window.sessionStorage.getItem(SESSION_ITEMS);
@@ -22,7 +22,7 @@ const Panel = () => {
         ]);
   }, []);
 
-  const handleAddProjectClick = () => {
+  const handleAddProjectClick = ({direction='column'}) => {
     const nextIndex = items.length + 1;
     const newItem = {
       defaultName: `Project ${nextIndex}`,
@@ -42,7 +42,8 @@ const Panel = () => {
   };
 
   return (
-    <Flex direction={"row"} gap={"lg"}>
+    <>
+    <Flex direction={direction} gap={"lg"}>
       {items.map((project) => (
         <div key={project.id}>
           <Divider size="sm" label={project.defaultName} labelPosition="center" />
@@ -51,6 +52,7 @@ const Panel = () => {
             items={items}
             setItems={setItems}
             project={project}
+            direction={direction === 'row' ? 'column' : 'row'}
           />
         </div>
       ))}
@@ -77,6 +79,7 @@ const Panel = () => {
         </ActionIcon>
       </Stack>
     </Flex>
+    </>
   );
 };
 
