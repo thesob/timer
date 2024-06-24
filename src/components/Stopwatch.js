@@ -12,9 +12,11 @@ import { useEffect, useRef, useState } from "react";
 import { useInterval } from "@mantine/hooks";
 import StopwatchSettings from "./StopwatchSettings";
 import {
+  SESSION_PROJECT_NAME_BASE,
   SESSION_COUNT_BASE,
   SESSION_HOURLY_NOTIFICATION_BASE,
-  SESSION_PROJECT_NAME_BASE,
+  SESSION_COLOR_BASE,
+  SESSION_COLOR_CLASS_BASE,
   toTimeString,
 } from "../utils/utils";
 import { FaCreativeCommonsZero, FaPlay, FaStop } from "react-icons/fa6";
@@ -26,19 +28,28 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
   const SESSION_PROJECT_NAME = addIdTo(SESSION_PROJECT_NAME_BASE);
   const SESSION_COUNT = addIdTo(SESSION_COUNT_BASE);
   const SESSION_HOURLY_NOTIFICATION = addIdTo(SESSION_HOURLY_NOTIFICATION_BASE);
+  const SESSION_COLOR = addIdTo(SESSION_COLOR_BASE)
+  const SESSION_COLOR_CLASS = addIdTo(SESSION_COLOR_CLASS_BASE)
 
   const [seconds, setSeconds] = useState(0);
   const [projectName, setProjectName] = useState(defaultName);
   const [hourlyNotification, setHourlyNotification] = useState(false);
   const [isClockVisible, setIsClockVisible] = useState(clockVisible);
+  const [hexVeilColor, setHexVeilColor] = useState('')
+  const [colorClass, setColorClass] = useState('');
   
   useEffect(() => {
     const sName = window.sessionStorage.getItem(SESSION_PROJECT_NAME);
     const sCount = window.sessionStorage.getItem(SESSION_COUNT);
     const sHourlyNotification = window.sessionStorage.getItem(SESSION_HOURLY_NOTIFICATION) === "true";
+    const sHexColor = window.sessionStorage.getItem(SESSION_COLOR);
+    const sColorClass = window.sessionStorage.getItem(SESSION_COLOR_CLASS);
+
     sName && setProjectName(sName);
     sCount && setSeconds(Number.parseInt(sCount));
     sHourlyNotification && setHourlyNotification(sHourlyNotification);
+    sHexColor && setHexVeilColor(sHexColor)
+    sColorClass && setColorClass(sColorClass)
     // eslint-disable-next-line
   }, []);
   
@@ -143,7 +154,13 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
           />
         </Group>
       <Stack align="center" gap="xs">
-        {isClockVisible ? <Clock counter={seconds} /> : null}
+        {isClockVisible 
+          ? <Clock 
+              counter={seconds} 
+              colorClass={colorClass} 
+              veilColor={hexVeilColor}
+            /> 
+          : null}
         <Code c="darkgray">
           <h1
             style={{
@@ -196,6 +213,12 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
                 hourlyNotificationSessionId={SESSION_HOURLY_NOTIFICATION}
                 hourlyNotification={hourlyNotification}
                 setHourlyNotification={setHourlyNotification}
+                hexColorSessionId={SESSION_COLOR_CLASS}
+                hexColor={hexVeilColor}
+                setHexColor={setHexVeilColor}
+                colorClassSessionId={SESSION_COLOR_CLASS}
+                colorClass={colorClass}
+                setColorClass={setColorClass}
               />
             </Popover.Dropdown>
           </Popover>

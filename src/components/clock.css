@@ -1,19 +1,47 @@
-#clock {
-  background: #fff url("../images/24_hours_clock_face_540x540.webp") no-repeat
-    center;
+.clock {
+  background: url("../images/24_hours_clock_face_540x540.webp") no-repeat center;
   background-position: 0.24% 1.07%;
   height: 28.5vmin;
   width: 28.5vmin;
   background-size: 100% 100%;
   position: relative;
-
-  min-width: none;
   min-height: auto;
 }
 
-#seconds_container,
-#minutes_container,
-#hours_container {
+.roseish {
+  -webkit-filter: brightness(0.6)contrast(3.4)hue-rotate(217deg)saturate(9.9);
+  filter: brightness(0.6)contrast(3.4)hue-rotate(217deg)saturate(9.9);
+}
+
+.yellowish {
+  -webkit-filter: brightness(0.6)contrast(3.4)sepia(20%)saturate(9.9);
+  filter: brightness(0.6)contrast(3.4)sepia(20%)saturate(9.9);
+}
+
+.blueish {
+  -webkit-filter: brightness(0.6)contrast(3.4)hue-rotate(100deg)saturate(9.9);
+  filter: brightness(0.6)contrast(3.4)hue-rotate(100deg)saturate(9.9);
+}
+
+.greenish {
+  -webkit-filter: brightness(0.6)contrast(3.4)hue-rotate(70deg)saturate(9.9);
+  filter: brightness(0.6)contrast(3.4)hue-rotate(70deg)saturate(9.9);
+}
+.veil_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 28.5vmin;
+  width: 28.5vmin;
+  border-radius: 50%;
+  background-position: 0.24% 1.07%;
+  z-index: 10;
+  
+}
+
+.seconds_container,
+.minutes_container,
+.hours_container {
   position: absolute;
   top: 0;
   right: 0;
@@ -23,7 +51,7 @@
   animation-play-state: var(--hands-animation-state);
 }
 
-#hours_img {
+.hours_img {
   width: 7%;
   height: 32%;
   left: 46.4%;
@@ -31,7 +59,7 @@
   position: absolute;
 }
 
-#minutes_img {
+.minutes_img {
   width: 7%;
   height: 42.8%;
   left: 46.7%;
@@ -39,15 +67,10 @@
   position: absolute;
 }
 
-#seconds_img {
+.seconds_img {
   width: 4.4%;
   height: 43.7%;
   left: 47.8%;
   top: 17.4%;
   position: absolute;
-}
-
-.close_button {
-  position: absolute;
-  left: 100%;
 }

@@ -3,6 +3,8 @@ export const SESSION_COUNT_BASE = 'count'
 export const SESSION_HOURLY_NOTIFICATION_BASE = 'hourly_sound'
 export const SESSION_ITEMS = "items"
 export const SESSION_DIRECTION = "direction"
+export const SESSION_COLOR_BASE = "color"
+export const SESSION_COLOR_CLASS_BASE = "color_class"
 
 /** Calculates total seconds from a timestamp shaped "HH:mm:ss"
  *  where seconds and minutes need to be less than 60
