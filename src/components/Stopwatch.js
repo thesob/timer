@@ -213,7 +213,7 @@ const Stopwatch = ({ defaultName, id, parentId, clockVisible = true}) => {
                 hourlyNotificationSessionId={SESSION_HOURLY_NOTIFICATION}
                 hourlyNotification={hourlyNotification}
                 setHourlyNotification={setHourlyNotification}
-                hexColorSessionId={SESSION_COLOR_CLASS}
+                hexColorSessionId={SESSION_COLOR}
                 hexColor={hexVeilColor}
                 setHexColor={setHexVeilColor}
                 colorClassSessionId={SESSION_COLOR_CLASS}
